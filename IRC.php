@@ -118,7 +118,7 @@ class IRC {
                     CURLOPT_POSTFIELDS => http_build_query(
                         [
                             "chat_id" => "@KodingTeh",
-                            "text" => "test:\n\n".$message
+                            "text" => "{$nickname}:\n\n".$message
                         ]
                     )
                 ]
