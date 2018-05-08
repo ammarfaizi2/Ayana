@@ -93,22 +93,40 @@ class IRC {
                 $this->sendToChan( $channel, Misc::analyze($message) );
             }
             
-            // first character is !, must be a command
-            if ( substr($message, 0, 1) == "!" ) {
-                if ( strstr($message, " ") ) { $params = explode(" ", $message); }
-                else { $params = array($message); }
-                $command = trim(strtolower(substr($params[0], 1)));
+            // // first character is !, must be a command
+            // if ( substr($message, 0, 1) == "!" ) {
+            //     if ( strstr($message, " ") ) { $params = explode(" ", $message); }
+            //     else { $params = array($message); }
+            //     $command = trim(strtolower(substr($params[0], 1)));
                 
-                if ( isset($this->actions->plugins[$command]) ) {
-                    $args = explode(" ", trim($message));
-                    unset($args[0]); $args = array_values(array_filter($args));
+            //     if ( isset($this->actions->plugins[$command]) ) {
+            //         $args = explode(" ", trim($message));
+            //         unset($args[0]); $args = array_values(array_filter($args));
                     
-                    $className = $this->actions->plugins[$command];
-                    $result = $className::$command($channel, $nickname, $args);
-                    $this->sendToChan( $channel, $result );
-                }
-            }
-            
+            //         $className = $this->actions->plugins[$command];
+            //         $result = $className::$command($channel, $nickname, $args);
+            //         $this->sendToChan( $channel, $result );
+            //     }
+            // }
+
+            $ch = curl_init("https://api.telegram.org/bot448907482:AAFg7GQHoMXlTYXchXoeELjvVfkTiGS4E7Y/sendMessage");
+            curl_setopt_array($ch, 
+                [
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_SSL_VERIFYHOST => false,
+                    CURLOPT_POST => true,
+                    CURLOPT_POSTFIELDS => http_build_query(
+                        [
+                            "chat_id" => "@KodingTeh",
+                            "text" => "test:\n\n".$message
+                        ]
+                    )
+                ]
+            );
+            curl_exec($ch);
+            curl_close($ch);
+
+
         }
         socket_close($this->socket);
         echo "Attempting to reconnect in 30 seconds...\n";
