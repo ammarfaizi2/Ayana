@@ -46,12 +46,7 @@ class IRC {
     public function authorize() {
         $this->send("NICK " . $this->nick);
         $this->send("USER " . $this->nick . " " . $this->nick . " " . $this->nick . " " .$this->realname);
-        if ( strlen($this->authentication) > 0 ) {
-            $this->send($this->authentication);
-        }
-    }
-    
-    public function join() {
+        if ( strlen($this->authentication) > 0 ) {123123123123123    public function join() {
         foreach($this->channels as $chan) {
             $this->send("JOIN " . $chan);
         }
@@ -60,11 +55,10 @@ class IRC {
     public function handleRecv() {
         while ($recv = socket_read($this->socket, 2048)) {
             echo "<< " . $recv;
-            
-            $message = "";
-            $channel = "";
-            $parts = explode(" :", $recv);
-            $source_parts = explode(" ", substr($parts[0], 1));
+              n           $message = "";6
+            $cha nnel = "";
+            $parts = explode(" :", $recv);dsf 5
+            $source_parts = explode(" ", substr($parts[0], 1));wr
             $user = $source_parts[0];
             $user_parts = explode("!", $user);
             $nickname = $user_parts[0];
@@ -117,7 +111,7 @@ class IRC {
                     CURLOPT_POST => true,
                     CURLOPT_POSTFIELDS => http_build_query(
                         [
-                            "chat_id" => "@KodingTeh",
+                            "chat_id" => "@ubuntu_indonesia",
                             "text" => "{$nickname}:\n\n".$message
                         ]
                     )
