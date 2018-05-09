@@ -108,23 +108,25 @@ class IRC {
             //         $this->sendToChan( $channel, $result );
             //     }
             // }
-
-            $ch = curl_init("https://api.telegram.org/bot448907482:AAFg7GQHoMXlTYXchXoeELjvVfkTiGS4E7Y/sendMessage");
-            curl_setopt_array($ch, 
-                [
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_SSL_VERIFYHOST => false,
-                    CURLOPT_POST => true,
-                    CURLOPT_POSTFIELDS => http_build_query(
-                        [
-                            "chat_id" => "@ubuntu_indonesia",
-                            "text" => "{$nickname} ({$user}):\n\n".$message
-                        ]
-                    )
-                ]
-            );
-            curl_exec($ch);
-            curl_close($ch);
+            $nickname = trim($nickname);
+            if ($nickname !== "ING") {
+                $ch = curl_init("https://api.telegram.org/bot448907482:AAFg7GQHoMXlTYXchXoeELjvVfkTiGS4E7Y/sendMessage");
+                curl_setopt_array($ch, 
+                    [
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_SSL_VERIFYHOST => false,
+                        CURLOPT_POST => true,
+                        CURLOPT_POSTFIELDS => http_build_query(
+                            [
+                                "chat_id" => "@ubuntu_indonesia",
+                                "text" => "{$nickname} ({$user}):\n\n".$message
+                            ]
+                        )
+                    ]
+                );
+                curl_exec($ch);
+                curl_close($ch);
+            }
 
 
         }
