@@ -88,10 +88,10 @@ class IRC {
                 $this->send("PONG" . substr($recv, 4));
             }
             
-            if ( isset($parts[1]) && substr($channel, 0, 1) == "#" ) {
-                // if message came from a channel, see if there is anything we can do with the whole message
-                $this->sendToChan( $channel, Misc::analyze($message) );
-            }
+            // if ( isset($parts[1]) && substr($channel, 0, 1) == "#" ) {
+            //     // if message came from a channel, see if there is anything we can do with the whole message
+            //     $this->sendToChan( $channel, Misc::analyze($message) );
+            // }
             
             // // first character is !, must be a command
             // if ( substr($message, 0, 1) == "!" ) {
